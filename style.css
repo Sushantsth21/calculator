@@ -1,0 +1,13 @@
+.numbers {
+    display: flex;
+    height: 300px;
+    width: 300px;
+    flex-wrap: wrap;
+    margin: auto;
+    padding: auto;
+}
+
+#num{
+    height: 100px;
+    width: 100px;
+}
