@@ -42,6 +42,27 @@ function parse(array){
         second = (10**k)*second + s_second[k];
     }
 }
+
+function cont_op(arr){
+    parse(arr);
+    result = operate(first,second,op);
+    first = 0;
+    second = 0;
+    main = [result];
+        
+    
+            
+}
+
+function display_main(){
+    for(let j = 0;j < d_main.length; j++){
+        d_main = (10**j)*d_main + d_main[j];
+
+    }
+}
+
+
+
 // first = (10**i)*first + array[i];
 let split = [];
 let s_first = [];
@@ -50,7 +71,11 @@ let main = [];
 let second = 0;
 let first = 0;
 let op = "";
+let result = 0;
+let d_main = [];
+let count = 0;
 
+const zero = document.getElementById("zero");
 const one = document.getElementById("one");
 const two = document.getElementById("two");
 const three = document.getElementById("three");
@@ -66,89 +91,112 @@ const mult = document.getElementById("multiply");
 const div = document.getElementById("divide");
 const equals = document.getElementById("equals");
 const clear = document.getElementById("clear");
+const display = document.getElementById("display")
  
 one.addEventListener("click", () => {
   main.push(1);
-  console.log("inside:", main);
+  d_main.push(1);
+  display.textContent = d_main.join('');
+  
 });
 
 two.addEventListener("click", () => {
     main.push(2);
-    console.log("inside:", main);
+    d_main.push(2);
+    display.textContent = d_main.join('');
 });
 
 three.addEventListener("click", () => {
     main.push(3);
-    console.log("inside:", main);
+    d_main.push(3);
+    display.textContent = d_main.join('');
 });
 
 four.addEventListener("click", () => {
     main.push(4);
-    console.log("inside:", main);
+    d_main.push(4);
+    display.textContent = d_main.join('');
 });
 
 five.addEventListener("click", () => {
     main.push(5);
-    console.log("inside:", main);
+    d_main.push(5);
+    display.textContent = d_main.join('');
 });
 
 six.addEventListener("click", () => {
     main.push(6);
-    console.log("inside:", main);
+    d_main.push(6);
+    display.textContent = d_main.join('');
 });
 
 seven.addEventListener("click", () => {
     main.push(7);
-    console.log("inside:", main);
+    d_main.push(7);
+    display.textContent = d_main.join('');
 });
 
 eight.addEventListener("click", () => {
     main.push(8);
-    console.log("inside:", main);
+    d_main.push(8);
+    display.textContent = d_main.join('');
 });
 
 nine.addEventListener("click", () => {
     main.push(9);
-    console.log("inside:", main);
+    d_main.push(9);
+    display.textContent = d_main.join('');  
+});
+
+zero.addEventListener("click", () => {
+    main.push(0);
+    d_main.push(0);
+    display.textContent = d_main.join('');  
 });
 
 minus.addEventListener("click", () => {
+    if (count > 1){
+        cont_op(main);
+    }
     main.push("-");
-    console.log("inside:", main);
+    d_main = [];
+    display.innerHTML = "";
 });
 
 mult.addEventListener("click", () => {
+    cont_op(main);
     main.push("*");
-    console.log("inside:", main);
+    d_main = [];
+    display.innerHTML = "";
 });
 
 div.addEventListener("click", () => {
+    cont_op(main);
     main.push("/");
-    console.log("inside:", main);
+    d_main = [];
+    display.innerHTML = "";
 });
 
 
 plus.addEventListener("click", () => {
+    cont_op(main);
     main.push("+");
-    console.log("inside:", main);
+    d_main = [];
+    display.innerHTML = "";
 });
 
 equals.addEventListener("click", () => {
-    // main.push(1);
-    // console.log("inside:", main);
     parse(main);
-    console.log(first);
-    console.log(second);
-    console.log(op);
+    result = operate(first,second,op);
+    display.textContent = result;
 });
 
 clear.addEventListener("click", () => {
     main = [];
-    console.log("inside:", main);
+    d_main= [];
+    first = 0;
+    second = 0;
+    op ="";
+    display.innerHTML = "";
 });
 
-
-
-console.log(first);
-console.log(second);
-console.log(op);
