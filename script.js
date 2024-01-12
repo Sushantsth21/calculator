@@ -1,79 +1,54 @@
-function add(a,b){
-    return a+b;
-}
-
-function subtract(a,b){
-    return a-b;
-}
-
-function multiply(a,b){
-    return a*b;
-}
-
-function divide(a,b){
-    return a/b;
-}
-
-function operate(a,b, operator){
-    if (operator == "+"){
-        return add(a,b);
-    }else if(operator == "-"){
-        return subtract(a,b);
-    }else if(operator == "*"){
-        return multiply(a,b);
-    }else if(operator == "/"){
-        return divide(a,b);
-    }
-}
-
-function parse(array){
-
-    for(let i = 0;i < array.length; i++){
-        if(array[i] == "+" || array[i] == "-" || array[i] == "/" || array[i] == "*" || array[i] == "="){
-            op = array[i];
-            s_first = array.slice(0, i);
-            s_second = array.slice(i+1, array.length);
-        }
-    }
-    for(let j = 0;j < s_first.length; j++){
-        first = (10**j)*first + s_first[j];
-    }
-    for(let k = 0;k < s_second.length; k++){
-        second = (10**k)*second + s_second[k];
-    }
-}
-
-function cont_op(arr){
-    parse(arr);
-    result = operate(first,second,op);
-    first = 0;
-    second = 0;
-    main = [result];
-        
-    
-            
-}
-
-function display_main(){
-    for(let j = 0;j < d_main.length; j++){
-        d_main = (10**j)*d_main + d_main[j];
-
-    }
-}
-
-
-
-// first = (10**i)*first + array[i];
-let split = [];
-let s_first = [];
-let s_second = [];
-let main = [];
-let second = 0;
-let first = 0;
-let op = "";
+let input = [];
+let operator = null;
 let result = 0;
-let d_main = [];
-let count = 0;
+let dis = 0;
+
+function addDigit(digit){
+    input.push(digit);
+}
+
+function addOperator(op){
+    if (operator){
+        calculate();
+    }
+    operator = op;
+    result = parseNumber(input);
+    input = [];
+}
+
+function calculate(){
+    let secondNumber = parseNumber(input);
+    switch(operator){
+        case '+':
+            result += secondNumber;
+            break;
+        case '-':
+            result -= secondNumber;
+            break;
+        case '*':
+            result *= secondNumber;
+            break;
+        case '/':
+            result /= secondNumber;
+            break;
+    }
+    input = [result];
+    operator = null;
+    updateDisplay();
+}
+
+function parseNumber(digits){
+    return parseInt(digits.join(''));
+}
+
+function updateDisplay(){
+    display.textContent = result;
+}
+
+function update(){
+    dis = parseNumber(input);
+    display.textContent = dis;
+}
 
 const zero = document.getElementById("zero");
 const one = document.getElementById("one");
@@ -92,111 +67,75 @@ const div = document.getElementById("divide");
 const equals = document.getElementById("equals");
 const clear = document.getElementById("clear");
 const display = document.getElementById("display")
+
  
 one.addEventListener("click", () => {
-  main.push(1);
-  d_main.push(1);
-  display.textContent = d_main.join('');
-  
+    addDigit(1);
+    update();
 });
 
 two.addEventListener("click", () => {
-    main.push(2);
-    d_main.push(2);
-    display.textContent = d_main.join('');
+    addDigit(2);
+    update();
 });
 
 three.addEventListener("click", () => {
-    main.push(3);
-    d_main.push(3);
-    display.textContent = d_main.join('');
+    addDigit(3);
+    update();
 });
 
 four.addEventListener("click", () => {
-    main.push(4);
-    d_main.push(4);
-    display.textContent = d_main.join('');
+    addDigit(4);
+    update();
 });
 
 five.addEventListener("click", () => {
-    main.push(5);
-    d_main.push(5);
-    display.textContent = d_main.join('');
+    addDigit(5);
+    update();
 });
 
 six.addEventListener("click", () => {
-    main.push(6);
-    d_main.push(6);
-    display.textContent = d_main.join('');
+    addDigit(6);
+    update();
 });
 
 seven.addEventListener("click", () => {
-    main.push(7);
-    d_main.push(7);
-    display.textContent = d_main.join('');
+    addDigit(7);
+    update();
 });
 
 eight.addEventListener("click", () => {
-    main.push(8);
-    d_main.push(8);
-    display.textContent = d_main.join('');
+    addDigit(8);
+    update();
 });
 
 nine.addEventListener("click", () => {
-    main.push(9);
-    d_main.push(9);
-    display.textContent = d_main.join('');  
+    addDigit(9);
+    update();
 });
 
 zero.addEventListener("click", () => {
-    main.push(0);
-    d_main.push(0);
-    display.textContent = d_main.join('');  
+    addDigit(0);
+    update();
 });
 
-minus.addEventListener("click", () => {
-    if (count > 1){
-        cont_op(main);
-    }
-    main.push("-");
-    d_main = [];
-    display.innerHTML = "";
-});
+minus.addEventListener("click", () => addOperator('-'));
 
-mult.addEventListener("click", () => {
-    cont_op(main);
-    main.push("*");
-    d_main = [];
-    display.innerHTML = "";
-});
+mult.addEventListener("click", () => addOperator('*'));
 
-div.addEventListener("click", () => {
-    cont_op(main);
-    main.push("/");
-    d_main = [];
-    display.innerHTML = "";
-});
+div.addEventListener("click", () => addOperator('/'));
 
-
-plus.addEventListener("click", () => {
-    cont_op(main);
-    main.push("+");
-    d_main = [];
-    display.innerHTML = "";
-});
+plus.addEventListener("click", () => addOperator('+'));
 
 equals.addEventListener("click", () => {
-    parse(main);
-    result = operate(first,second,op);
-    display.textContent = result;
+    calculate();
+    updateDisplay();
 });
 
 clear.addEventListener("click", () => {
-    main = [];
-    d_main= [];
-    first = 0;
-    second = 0;
-    op ="";
-    display.innerHTML = "";
+    input = [];
+    operator = null;
+    result = 0;
+    display.innerHTML = '';
 });
 
