@@ -1,46 +1,60 @@
 body {
     font-family: sans-serif;
-    background-color: #f0f0f0; /* Light gray background for the calculator */
+    background-color: #f0f0f0; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 100vh; /* Make calculator fill the viewport */
-    margin: 0;
-  }
+    height: 500px;
+    width: 500px;
+
+}
   
-  #display {
-    width: 300px; /* Adjust width as needed */
+#display {
+    width: 200px; 
     height: 50px;
-    background-color: #222; /* Dark background for display */
-    color: #fff; /* White text for display */
+    background-color: #222; 
+    color: #fff;
     text-align: right;
     padding: 10px;
     border-radius: 5px;
     font-size: 24px;
     margin-bottom: 20px;
-  }
+}
   
-  .numbers {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr); /* Create 3 columns for number buttons */
-    gap: 10px; /* Adjust spacing between buttons */
-  }
-  
-  button {
-    width: 100%;
+.numbers {
+    height: 200px;
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+.operators{
+    height: 100px;
+    width: 200px;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+}
+
+#zero{
+    width: 50%;
+}
+
+#back{
+    width: 50%;
+}
+button {
+    justify-content: space-between;
+    width: 66px;
     height: 50px;
-    background-color: #ccc; /* Light gray for number buttons */
-    border: none;
+    background-color: #ccc;
+    border: 1px bold black;
     font-size: 20px;
-    cursor: pointer;
-  }
+}
   
-  #zero {
-    grid-column: 1 / span 2; /* Make zero button span 2 columns */
-  }
-  
-  button:hover {
-    background-color: #ddd; /* Lighter gray on hover */
-  }
+button:hover {
+    background-color: #ddd;
+}
   

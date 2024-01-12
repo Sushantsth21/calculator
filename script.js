@@ -42,12 +42,16 @@ function parseNumber(digits){
 }
 
 function updateDisplay(){
-    display.textContent = result;
+    display.textContent = result || "ERROR!!!";
 }
 
 function update(){
     dis = parseNumber(input);
-    display.textContent = dis;
+    display.textContent = dis || 0;
+}
+
+function backspace(){
+    input.pop(input.length);
 }
 
 const zero = document.getElementById("zero");
@@ -66,7 +70,8 @@ const mult = document.getElementById("multiply");
 const div = document.getElementById("divide");
 const equals = document.getElementById("equals");
 const clear = document.getElementById("clear");
-const display = document.getElementById("display")
+const display = document.getElementById("display");
+const back = document.getElementById("back");
 
  
 one.addEventListener("click", () => {
@@ -137,5 +142,10 @@ clear.addEventListener("click", () => {
     operator = null;
     result = 0;
     display.innerHTML = '';
+});
+
+back.addEventListener("click", () =>{
+    backspace();
+    update();
 });
 
